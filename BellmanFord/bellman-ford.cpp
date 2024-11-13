@@ -7,46 +7,41 @@ using namespace std;
 
 int infinite = 1000000;
 
-string bellmanFord(vector<vector<pair<int, int>>>& adj, int s) {
+string bellmanFord(vector<vector<pair<int, int>>> &adj, int s) {
     int n = adj.size();
     vector<int> dist(n, infinite);
     dist[s] = 0;
 
-    cout << "Iniciando o algoritmo de Bellman-Ford..." << endl;
-
-    // Relaxa as arestas (n-1) vezes
-    for (int i = 0; i < n - 1; i++) {
-        for (int u = 0; u < n; u++) {  // Começa de 0, pois agora usamos índice baseado em 0
-            for (auto& edge : adj[u]) {
+    for (int l = 1; l < n - 1; l++) {
+        for (int u = 1; u < n; u++){ 
+          vector<pair<int, int>> edges = adj[u];
+            for (const auto& edge : adj[u]) {
                 int v = edge.first;
-                int wt = edge.second;
-                if (dist[u] != infinite && dist[u] + wt < dist[v]) {
-                    dist[v] = dist[u] + wt;
-                    cout << "Relaxando aresta (" << u << ", " << v << ") com peso " << wt << endl;
+                int w = edge.second;
+
+                if (dist[u] != infinite && dist[u] + w < dist[v]) {
+                    dist[v] = dist[u] + w;
                 }
             }
         }
     }
 
-    // Relaxamento adicional para verificar ciclos negativos
-    for (int u = 0; u < n; u++) {
-        for (auto& edge : adj[u]) {
+    for (int u = 1; u < n; u++) {
+        for (const auto& edge : adj[u]) {
             int v = edge.first;
-            int wt = edge.second;
-            if (dist[u] != infinite && dist[u] + wt < dist[v]) {
-                return "Ciclo negativo detectado!";
+            int w = edge.second;
+
+            if (dist[u] != infinite && dist[u] + w < dist[v]) {
+                return "Ciclo negativo detectado no grafo";
             }
         }
     }
 
-    // Construa a string com as distâncias
+
     string distances = "";
-    for (int i = 0; i < n; ++i) {  // Agora começamos de 0
-        if (dist[i] != infinite) {
-            distances += to_string(i) + ":" + to_string(dist[i]) + " ";
-        } else {
-            distances += to_string(i) + ":infinite ";
-        }
+    for (int i = 1; i < n; i++) {
+        distances += to_string(i) + ":";
+        distances += (dist[i] == infinite) ? "INF " : to_string(dist[i]) + " ";
     }
     return distances;
 }
@@ -54,7 +49,7 @@ string bellmanFord(vector<vector<pair<int, int>>>& adj, int s) {
 int main(int argc, char *argv[]) {
     string input_file = "";
     string output_file = "";
-    int start_node = 0; // Mudança: agora o índice de vértices é 0-based
+    int start_node = 1; // Jamais trocar
 
     for (int i = 1; i < argc; i++) {
         if (strcmp(argv[i], "-h") == 0) {
@@ -73,7 +68,7 @@ int main(int argc, char *argv[]) {
         }
     }
 
-    if (input_file == "") {
+    if (input_file.empty()) {
         cout << "Nenhum arquivo de entrada especificado. Use o parâmetro -f" << endl;
         return 1;
     }
@@ -86,31 +81,29 @@ int main(int argc, char *argv[]) {
 
     int n, m; // número de vértices e arestas
     fin >> n >> m;
-
-    cout << "Número de vértices: " << n << ", número de arestas: " << m << endl;
-
     // Ajuste aqui: agora estamos usando n para indexação baseada em 0
-    vector<vector<pair<int, int>>> adj(n);  // 0-based indexing
+    vector<vector<pair<int, int>>> adj(n + 1); // criando a matriz que emula um grafo
 
-    // lendo as arestas
-    int v1, v2, w;
+    
     for (int i = 0; i < m; ++i) {
-        fin >> v1 >> v2 >> w;
-        adj[v1].push_back({v2, w}); // Adiciona a aresta v1 -> v2 com peso w
-        cout << "Aresta lida: " << v1 << " -> " << v2 << " com peso " << w << endl;
+        int u, v, w;
+        fin >> u >> v >> w; // recebendo os vertices e peso entre arestas
+        adj[u].push_back(make_pair(v, w)); // adiciona v nos vizinhos de u
     }
+
     fin.close();
 
     string distances = bellmanFord(adj, start_node);
 
-    if (!output_file.empty()) {
+    if (!(output_file.empty())) {
         ofstream fout(output_file);
         if (!fout) {
-            cerr << "Não foi possível abrir o arquivo de saída: " << output_file << endl;
+            cerr << "Could not open output file: " << output_file << endl;
             return 1;
         }
         fout << distances;
         fout << endl;
+
         fout.close();
     }
     cout << distances << endl;
