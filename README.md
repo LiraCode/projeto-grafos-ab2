@@ -14,7 +14,9 @@
 - Makefiles implementados que geram arquivo bin (make no diretório /Dijkstra cria o arquivo `dijkstra`)
 - Algoritmos organizados por diretório
 - Menu de suporte pode ser chamado com `-h`
-- O algoritmo de Bellman-Ford conta com diretórios de casos de teste e gabarito dos casos teste, de um total de 20 casos.
-- Diretório `Helpers` conta com scripts em python de geradores de grafos para o algoritmo de Bellman-Ford.
+- O algoritmo de Bellman-Ford segue o mesmo padrão de pastas dos casos testes do Bat1 (pasta instances e results).
+- Na pasta "BellmanFord" o script teste.sh processa os testes do algoritmo.
+- O script testaAlgoritmos.sh faz o make de cada pasta e roda o Bat1.sh e o teste.sh.
+
 
 <small>Alunos: Felipe Lira e Leandro Wanderley  <br>UFAL - 2024.1 | Professor Rian</small>
