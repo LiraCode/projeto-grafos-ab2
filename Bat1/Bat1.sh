@@ -37,6 +37,7 @@ echo "Kruskal: $kruskal"
 echo "Dijkstra: $dijkstra"
 echo "Kosaraju: $kosaraju"
 
+echo "."
 echo "Testando algoritmo de Kosaraju"
 for i in instances_scc/*.dat
 do
@@ -53,7 +54,8 @@ do
 	rm temp;
 
 done
-
+echo -e "\e[32m###############################################################################################################################\e[0m"
+echo -e "\n"
 echo "Testando algoritmo de Kruskal"
 for i in instances/*.mtx
 do
@@ -73,7 +75,8 @@ done
 
 
 echo -e "\n\n";
-
+echo -e "\e[32m###############################################################################################################################\e[0m"
+echo -e "\n"
 echo "Testando algoritmo de Prim"
 for i in instances/*.mtx
 do
@@ -91,7 +94,8 @@ do
 
 done
 
-
+echo -e "\e[32m###############################################################################################################################\e[0m"
+echo -e "\n"
 echo "Testando algoritmo de Dijkstra"
 for i in instances/*.mtx
 do
