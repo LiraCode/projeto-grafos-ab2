@@ -1,5 +1,5 @@
 Conteúdo
-- Consjunto de instâncias (instances e instances_scc)
+- Conjunto de instâncias (instances e instances_scc)
 - Soluções do problema da árvore geradora mínima (gabarito_agm.txt)
 - Soluções do problema do caminho mínimo (diretório sp)
 - Soluções do problema componentes fortemente conexas (diretório scc)
