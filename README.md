@@ -1,11 +1,14 @@
 # Projeto de Teoria dos Grafos
 
-### Algoritmos Escolhidos:
+### Algoritmos Obrigatórios:
 
 - Algoritmo de Dijkstra
 - Algoritmo de Kosaraju
 - Algoritmo de Kruskal
 - Algoritmo de Prim
+
+### Algoritmo Escolhido:
+
 - Algoritmo de Bellman-Ford
 
 ### Especificações:
@@ -19,4 +22,4 @@
 - O script testaAlgoritmos.sh faz o make de cada pasta e roda o Bat1.sh e o teste.sh.
 
 
-<small>Alunos: Felipe Lira e Leandro Wanderley  <br>UFAL - 2024.1 | Professor Rian</small>
+<small>Alunos: Felipe Lira e Leandro Wanderley  <br>UFAL - 2024.1 | Professor: Rian Gabriel Pinheiro</small>
